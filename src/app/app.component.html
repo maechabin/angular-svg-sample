@@ -9,19 +9,26 @@
     <button (click)="changeText()">テキスト変更</button>
     <button (click)="changeColor()">色変更</button>
   </div>
+  <div>
+    <app-svg
       [text]="text"
       [left]="left"
       [right]="right"
       [shouldDisplay]="shouldDisplay"
       (iconClickEvent)="handleIconClickEvent()"
+    ></app-svg>
+  </div>
 
-  <app-svg
+  <div>
+    <app-svg
     [text]="text"
     [left]="right"
     [right]="left"
     [shouldDisplay]="shouldDisplay2"
     (iconClickEvent)="handleIconClickEvent2()"
   ></app-svg>
+  </div>
+
   <div>
     <app-svg2></app-svg2>
   </div>
