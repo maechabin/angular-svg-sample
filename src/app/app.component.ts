@@ -16,6 +16,8 @@ export class AppComponent {
     big: '#56aaff',
     small: '#bf0000',
   };
+  shouldDisplay = true;
+  shouldDisplay2 = true;
 
   changeText() {
     if (this.text === 'text') {
@@ -45,5 +47,13 @@ export class AppComponent {
         small: '#0000bf'
       };
     }
+  }
+
+  handleIconClickEvent() {
+    this.shouldDisplay = !this.shouldDisplay;
+  }
+
+  handleIconClickEvent2() {
+    this.shouldDisplay2 = !this.shouldDisplay2;
   }
 }
