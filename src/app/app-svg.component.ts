@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-svg',
@@ -14,19 +14,22 @@ import { Component, Input } from '@angular/core';
       </g>
       <g>
         <title>Layer 1</title>
-        <ellipse ry="44.5" rx="81.5" id="svg_1" cy="47.9375" cx="85" stroke-width="1.5" stroke="#000" [attr.fill]="left.big" style="transition: all 1s"/>
-        <text stroke="#000" transform="matrix(0.9482828378677368,0,0,1,4.938988983631134,0) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_2" y="54.4375" x="64.918407" stroke-width="0" fill="#000000">{{ text }}</text>
+        <svg width="167" height="93">
+          <ellipse ry="44.5" rx="81.5" id="svg_1" cy="47.9375" cx="85" stroke-width="1.5" stroke="#000" [attr.fill]="left.big" style="transition: all 1s" />
+          <text stroke="#000" dominant-baseline="middle" transform="matrix(0.9482828378677368,0,0,1,4.938988983631134,0) " xml:space="preserve" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_2" y="50%" x="50%" stroke-width="0" fill="#000000">{{ text }}</text>
+        </svg>
         <rect id="svg_13" height="76" width="152" y="128.9375" x="11" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="none"/>
         <rect id="svg_14" height="76" width="152" y="127.9375" x="210" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="none"/>
         <ellipse ry="44.5" rx="81.5" id="svg_7" cy="49.9375" cx="277" stroke-width="1.5" stroke="#000" [attr.fill]="right.big" style="transition: all 1s"/>
-        <text stroke="#000" transform="matrix(0.9482828378677368,0,0,1,4.938988983631134,0) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_8" y="58.4375" x="266.335107" stroke-width="0" fill="#000000">{{ text }}</text>
+        <text stroke="#000" transform="matrix(0.9482828378677368,0,0,1,4.938988983631134,0) " xml:space="preserve" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_8" y="58.4375" x="266.335107" stroke-width="0" fill="#000000" style="text-align: center;">{{ text }}</text>
         <line stroke-linecap="null" stroke-linejoin="null" id="svg_11" y2="122.9375" x2="86" y1="90.9375" x1="86" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="none"/>
         <line stroke="#000" stroke-linecap="null" stroke-linejoin="null" id="svg_12" y2="125.9375" x2="279" y1="93.9375" x1="279" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="none"/>
-        <ellipse ry="21.5" rx="23" id="svg_6" cy="131.4375" cx="280" stroke-opacity="null" stroke-width="1.5" stroke="#000" [attr.fill]="left.small" style="transition: all 1s"/>
-        <ellipse ry="21.5" rx="23" id="svg_4" cy="130.4375" cx="87" stroke-opacity="null" stroke-width="1.5" stroke="#000" [attr.fill]="right.small" style="transition: all 1s"/>
+        <ellipse ry="21.5" rx="23" id="svg_6" cy="131.4375" cx="280" stroke-opacity="null" stroke-width="1.5" stroke="#000" [attr.fill]="left.small" style="transition: all 1s" *ngIf="shouldDisplay" (click)="handleIconClick()"/>
+        <ellipse ry="21.5" rx="23" id="svg_4" cy="130.4375" cx="87" stroke-opacity="null" stroke-width="1.5" stroke="#000" [attr.fill]="right.small" style="transition: all 1s" *ngIf="!shouldDisplay" (click)="handleIconClick()"/>
       </g>
     </svg>
   `,
+  // templateUrl: './sample.svg'
 })
 export class AppSVGComponent {
   @Input() text: string;
@@ -38,4 +41,11 @@ export class AppSVGComponent {
     big: string,
     small: string,
   };
+  @Input() shouldDisplay = true;
+
+  @Output() iconClickEvent: EventEmitter<void> = new EventEmitter<void>();
+
+  handleIconClick() {
+    this.iconClickEvent.emit();
+  }
 }
